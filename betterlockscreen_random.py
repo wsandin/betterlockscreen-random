@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
 import os
-import random
-import subprocess
+from random import randint
+from subprocess import call, STDOUT
 
 
 class Wallpaper():
@@ -33,19 +33,19 @@ class Wallpaper():
                 'No wallpapers matching specified file extensions in specified directory.'
             )
 
-        rnd_idx = random.randint(1, len(self.bg_list))
+        rnd_idx = randint(1, len(self.bg_list))
         rnd_bg = os.path.join(self.bg_file_dir, self.bg_list[rnd_idx])
 
         return rnd_bg
 
     def set_bg(self):
-        FNULL = open(os.devnull, 'w')
+        DEV_NULL = open(os.devnull, 'w')
 
-        subprocess.call(
+        call(
             [self.lock_bin, self.lock_bin_flags,
              self.rnd_bg()],
-            stdout=FNULL,
-            stderr=subprocess.STDOUT)
+            stdout=DEV_NULL,
+            stderr=STDOUT)
 
 
 def main():
